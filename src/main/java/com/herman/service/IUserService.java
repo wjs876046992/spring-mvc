@@ -19,4 +19,6 @@ public interface IUserService {
     public User findUserById(Integer id);
 
     public void doPrint();
+
+    public void testAroundAdviceWithParams(String name, int times);
 }

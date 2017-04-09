@@ -36,5 +36,11 @@ public class UserService implements IUserService{
 
     public void doPrint() {
         System.out.println("doPrint");
+//        throw new RuntimeException();
+    }
+
+    public void testAroundAdviceWithParams(String name, int times) {
+
+        System.out.println("testAroundAdviceWithParams: " + name + "  " + times);
     }
 }

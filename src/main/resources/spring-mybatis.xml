@@ -74,6 +74,13 @@
             <!--pointcut="execution(* com.herman.dao.*Dao.do*(..))"-->
             <aop:before method="beforeMethod" pointcut-ref="testPointcut" />
             <aop:after-returning method="afterReturning" pointcut-ref="testPointcut" />
+            <aop:after-throwing method="afterThrowing" pointcut-ref="testPointcut" />
+            <aop:after method="alwaysAfter" pointcut-ref="testPointcut" />
+            <aop:around method="aroundAdvice" pointcut-ref="testPointcut" />
+
+            <aop:around method="aroundAdviceParams"
+                        pointcut="execution(* com.herman.service.impl.UserService.testAroundAdviceWithParams(String, int))
+                                and args(name, times)"/>
         </aop:aspect>
     </aop:config>
 

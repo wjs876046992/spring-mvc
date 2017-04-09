@@ -34,7 +34,8 @@ public class BaseTestUtil {
     @Test
     public void testAOPAspect() {
 //        this.userService.doPrint();
-        System.out.println(this.userService.findUserById(1).getUsername());
+//        System.out.println(this.userService.findUserById(1).getUsername());
+        this.userService.testAroundAdviceWithParams("herman", 2);
 
     }
 }
