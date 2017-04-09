@@ -1,0 +1,9 @@
+-- auto Generated on 2017-04-08 11:33:16 
+-- DROP TABLE IF EXISTS `user`; 
+CREATE TABLE user(
+    `id` INTEGER(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'id',
+    `username` VARCHAR(50) NOT NULL DEFAULT '' COMMENT 'username',
+    `password` VARCHAR(50) NOT NULL DEFAULT '' COMMENT 'password',
+    `crate_time` DATETIME NOT NULL DEFAULT '1900-01-01 00:00:00' COMMENT 'crateTime',
+    PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT 'user';

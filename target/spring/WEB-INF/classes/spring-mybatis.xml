@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context-3.1.xsd
+                        http://www.springframework.org/schema/aop
+                        http://www.springframework.org/schema/aop/spring-aop-3.0.xsd ">
+
+<!--自动扫描-->
+    <context:component-scan base-package="com.herman" />
+
+    <!--加载jdbc配置文件-->
+    <bean id="propertyPlaceholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:jdbc.properties" />
+    </bean>
+
+    <!--配置数据源-->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driver}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+
+        <!--初始化连接大小-->
+        <property name="initialSize" value="${jdbc.initialSize}" />
+        <!--连接池最大数量-->
+        <property name="maxActive" value="${jdbc.maxActive}" />
+        <!--连接池最大空闲-->
+        <property name="maxIdle" value="${jdbc.maxIdle}" />
+        <!--连接池最小空闲-->
+        <property name="minIdle" value="${jdbc.minIdle}" />
+        <!--连接池最大等待时间-->
+        <property name="maxWait" value="${jdbc.maxWait}" />
+    </bean>
+
+    <!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="mapperLocations" value="classpath*:mapper/*.xml" />
+    </bean>
+
+    <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.herman.dao" />
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+    </bean>
+
+    <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <bean id="testAdvice" class="com.herman.advice.TestAdvice" />
+
+    <!--
+        pointcut execution表达式的几种情况
+        execution(public * *(..))   执行所有的public方法时
+        execution(* set*(..))   执行所有的set方法时
+        execution(* com.herman.service.UserService.*(..))   执行所有的UserService中方法时
+        execution(* com.herman.service..(..))   执行com.herman.service包下所有的方法
+        execution(* com.herman.service...(..))   执行com.herman.service包及其子包下所有的方法
+
+        以下只有Spring AOP才支持的写法
+        within(com.herman.service.*)    within用于匹配指定类型内的方法执行
+        this(com.herman.service.UserService)    this用于匹配当前AOP代理对象类型的执行方法
+    -->
+    <aop:config>
+        <aop:aspect id="testAspect" ref="testAdvice">
+            <aop:pointcut id="testPointcut" expression="execution(* com.herman.service.*Service.do*(..))" />
+            <!--pointcut="execution(* com.herman.dao.*Dao.do*(..))"-->
+            <aop:before method="beforeMethod" pointcut-ref="testPointcut" />
+        </aop:aspect>
+    </aop:config>
+
+</beans>
