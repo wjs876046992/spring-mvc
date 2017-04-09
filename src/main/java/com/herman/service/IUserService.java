@@ -21,4 +21,6 @@ public interface IUserService {
     public void doPrint();
 
     public void testAroundAdviceWithParams(String name, int times);
+
+    void testDeclareParents();
 }

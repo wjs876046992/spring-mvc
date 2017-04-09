@@ -81,6 +81,11 @@
             <aop:around method="aroundAdviceParams"
                         pointcut="execution(* com.herman.service.impl.UserService.testAroundAdviceWithParams(String, int))
                                 and args(name, times)"/>
+
+            <aop:declare-parents
+                    types-matching="com.herman.service.impl.UserService+"
+                    implement-interface="com.herman.service.IAdviceService"
+                    default-impl="com.herman.service.impl.AdviceService" />
         </aop:aspect>
     </aop:config>
 

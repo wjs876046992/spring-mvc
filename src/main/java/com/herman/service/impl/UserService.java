@@ -10,7 +10,8 @@ import java.util.List;
 
 @Service("userService")
 public class UserService implements IUserService{
-
+    //由declare-parent作申明之后，可以强制类型转换成implement-interface的类型，
+    // 并且可以使用default-impl所指定的实现类（此实现类就是代表declare-parent申明的切面对象）
     @Resource
     private IUserDao userDao;
 
@@ -42,5 +43,10 @@ public class UserService implements IUserService{
     public void testAroundAdviceWithParams(String name, int times) {
 
         System.out.println("testAroundAdviceWithParams: " + name + "  " + times);
+    }
+
+    public void testDeclareParents() {
+
+        System.out.println("testDeclareParents");
     }
 }

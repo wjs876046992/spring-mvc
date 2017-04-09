@@ -1,4 +1,5 @@
 import com.herman.entity.User;
+import com.herman.service.IAdviceService;
 import com.herman.service.IUserService;
 import org.apache.log4j.Logger;
 import org.junit.Test;
@@ -35,7 +36,8 @@ public class BaseTestUtil {
     public void testAOPAspect() {
 //        this.userService.doPrint();
 //        System.out.println(this.userService.findUserById(1).getUsername());
-        this.userService.testAroundAdviceWithParams("herman", 2);
+//        this.userService.testAroundAdviceWithParams("herman", 2);
+        ((IAdviceService)this.userService).advice();
 
     }
 }
