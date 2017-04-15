@@ -8,9 +8,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:spring-mybatis.xml"})
@@ -29,7 +28,8 @@ public class BaseTestUtil {
 
     @Test
     public void insert() {
-        User user = new User(1, "jack", "qwe123", new Date());
+
+        User user = new User(3, "jack", "qwe123", new Date());
         this.userService.doInsert(user);
         log.info("Insert successfully!");
     }
@@ -84,5 +84,13 @@ public class BaseTestUtil {
 
         str = "test ok";
         ch[0] = 'g';
+    }
+
+    @Test
+    public void javaFeatueTest() {
+        int m;
+        boolean b;  //未初始化变量，不能使用
+
+        System.out.println();
     }
 }
