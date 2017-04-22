@@ -8,7 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
-import java.util.Date;
+import java.util.*;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -87,10 +87,47 @@ public class BaseTestUtil {
     }
 
     @Test
-    public void javaFeatueTest() {
-        int m;
-        boolean b;  //未初始化变量，不能使用
+    public void javaFeatureTest() {
+        int m; boolean b;  //未初始化变量，不能使用
 
-        System.out.println();
+        //jdk 1.7特性
+        //new 自动匹配泛型
+        ArrayList<String> nameList = new ArrayList<>();
+        nameList.add("Herman");
+
+        switch ("test") {
+            case "test":
+                System.out.println("This is test.");
+                break;
+            case "test1":
+                System.out.println("This is test1.");
+                break;
+            default:
+                System.out.println("This is default.");
+                break;
+        }
+
+        Map<String, String> envMap = System.getenv();
+        System.out.println("---------1---------");
+        System.err.println("Map.Entry 处理较多数据");
+        Set<Map.Entry<String, String>> entries = envMap.entrySet();
+        for (Map.Entry<String, String> entry: entries) {
+            System.out.println(entry.getKey() + "  " + entry.getValue());
+        }
+
+        System.out.println("---------2---------");
+        System.err.println("iterator");
+        Iterator<Map.Entry<String, String>> iterator = entries.iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<String, String> next = iterator.next();
+            System.out.println(next.getKey() + "  " + next.getValue());
+        }
+
+        System.out.println("---------3---------");
+        System.err.println("ketSet 效率低");
+        Set<String> keySet = envMap.keySet();
+        for (String key: keySet) {
+            System.out.println(key + "  " + envMap.get(key));
+        }
     }
 }
