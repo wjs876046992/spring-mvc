@@ -1,7 +1,6 @@
 package com.herman.service.impl;
 
 import com.herman.dao.HeroMapper;
-import com.herman.dao.IUserDao;
 import com.herman.entity.Hero;
 import com.herman.service.IHeroService;
 import org.springframework.stereotype.Service;
@@ -32,7 +31,7 @@ public class HeroService implements IHeroService {
 
     @Override
     public Hero selectByPrimaryKey(Integer id) {
-        return null;
+        return this.heroMapper.selectByPrimaryKey(id);
     }
 
     @Override
@@ -51,7 +50,7 @@ public class HeroService implements IHeroService {
     }
 
     @Override
-    public List<Hero> find() {
-        return this.heroMapper.find();
+    public List<Hero> findAll() {
+        return this.heroMapper.findAll();
     }
 }

@@ -12,7 +12,7 @@ public interface IHeroService {
 
     int insertSelective(Hero record);
 
-    Hero selectByPrimaryKey(Integer id);
+    Hero selectByPrimaryKey(@Param("id") Integer id);
 
     int updateByPrimaryKeySelective(Hero record);
 
@@ -20,5 +20,5 @@ public interface IHeroService {
 
     List<Hero> findByName(@Param("name") String name);
 
-    List<Hero> find();
+    List<Hero> findAll();
 }

@@ -1,6 +1,7 @@
 package com.herman.controller;
 
 import com.herman.entity.Hero;
+import com.herman.service.IHeroService;
 import com.herman.service.impl.HeroService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +25,7 @@ public class HeroController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public Map<String, Object> getHeroes() {
         Map<String, Object> result = new HashMap<>();
-        List<Hero> list = this.heroService.find();
+        List<Hero> list = this.heroService.findAll();
         result.put("data", result);
         return result;
     }

@@ -23,7 +23,7 @@ public interface HeroMapper {
 
     List<Hero> findByName(@Param("name")String name);
 
-    List<Hero> find();
+    List<Hero> findAll();
 
 
 
