@@ -17,5 +17,9 @@ public interface IUserDao {
     int update(@Param("pojo") User pojo);
 
     User findUserById(@Param("id") Integer id);
+    int deleteById(@Param("id")Integer id);
+User findById(@Param("id")Integer id);
+
+
 
 }
