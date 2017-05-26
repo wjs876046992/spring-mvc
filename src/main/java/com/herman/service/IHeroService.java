@@ -1,14 +1,11 @@
-package com.herman.dao;
+package com.herman.service;
 
 import com.herman.entity.Hero;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
-import javax.annotation.Resource;
 import java.util.List;
 
-@Repository
-public interface HeroMapper {
+public interface IHeroService {
     int deleteByPrimaryKey(Integer id);
 
     int insert(Hero record);
@@ -21,10 +18,7 @@ public interface HeroMapper {
 
     int updateByPrimaryKey(Hero record);
 
-    List<Hero> findByName(@Param("name")String name);
+    List<Hero> findByName(@Param("name") String name);
 
     List<Hero> find();
-
-
-
 }

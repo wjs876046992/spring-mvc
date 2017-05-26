@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-@RequestMapping("api/user")
+@RequestMapping("/user")
 public class UserController {
 
     private static Logger log = Logger.getLogger(UserController.class);
@@ -36,7 +36,7 @@ public class UserController {
     public Map<String, Object> findUser(@PathVariable Integer id) {
         Map<String, Object> result = new HashMap<String, Object>();
         User user = this.userService.findUserById(id);
-        result.put("user", user);
+        result.put("data", user);
         return result;
     }
 }
