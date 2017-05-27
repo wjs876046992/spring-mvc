@@ -4,14 +4,12 @@ import com.herman.entity.User;
 import com.herman.service.impl.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,7 +30,7 @@ public class UserController {
 //    }
 
     @ResponseBody
-    @RequestMapping(value="/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Map<String, Object> findUser(@PathVariable Integer id) {
         Map<String, Object> result = new HashMap<String, Object>();
         User user = this.userService.findUserById(id);

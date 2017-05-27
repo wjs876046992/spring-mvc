@@ -41,12 +41,12 @@ public class HeroService implements IHeroService {
 
     @Override
     public int updateByPrimaryKey(Hero record) {
-        return 0;
+        return this.heroMapper.updateByPrimaryKey(record);
     }
 
     @Override
     public List<Hero> findByName(String name) {
-        return null;
+        return this.heroMapper.findByName(name);
     }
 
     @Override

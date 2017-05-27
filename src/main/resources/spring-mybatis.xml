@@ -40,7 +40,7 @@
     <!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
-        <property name="mapperLocations" value="classpath*:com/herman/entity/xml/*.xml" />
+        <property name="mapperLocations" value="classpath*:xml/*.xml" />
     </bean>
 
     <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
@@ -70,7 +70,10 @@
     -->
     <aop:config proxy-target-class="true">
         <aop:aspect id="testAspect" ref="testAdvice">
-            <aop:pointcut id="testPointcut" expression="execution(* com.herman.service.*Service.do*(..))" />
+            <aop:pointcut id="testPointcut" expression="execution(* com.herman.service.*Service.*(..))
+                and (execution( * insert*(..)) or
+                     execution( * delete*(..))  or
+                     execution( * update*(..)))" />
             <!--pointcut="execution(* com.herman.dao.*Dao.do*(..))"-->
             <aop:before method="beforeMethod" pointcut-ref="testPointcut" />
             <aop:after-returning method="afterReturning" pointcut-ref="testPointcut" />

@@ -15,7 +15,7 @@ public interface HeroMapper {
 
     int insertSelective(Hero record);
 
-    Hero selectByPrimaryKey(Integer id);
+    Hero selectByPrimaryKey(@Param("id") Integer id);
 
     int updateByPrimaryKeySelective(Hero record);
 
