@@ -45,9 +45,26 @@ public class HeroController {
                 e.printStackTrace();
             }
         }
-
         Map<String, Object> result = new HashMap<>();
         result.put("data", list);
+        return result;
+    }
+
+    @ResponseBody
+    @RequestMapping(method = RequestMethod.PUT)
+    public Map<String, Object> updateHero(@RequestBody Hero hero) {
+        Map<String, Object> result = new HashMap<>();
+        int count = this.heroService.updateByPrimaryKey(hero);
+        result.put("data", count);
+        return result;
+    }
+
+    @ResponseBody
+    @RequestMapping(method = RequestMethod.POST)
+    public Map<String, Object> createHero(@RequestBody Hero hero) {
+        Map<String, Object> result = new HashMap<>();
+        int count = this.heroService.insert(hero);
+        result.put("data", count);
         return result;
     }
 

@@ -21,7 +21,7 @@ public class HeroService implements IHeroService {
 
     @Override
     public int insert(Hero record) {
-        return 0;
+        return this.heroMapper.insert(record);
     }
 
     @Override
