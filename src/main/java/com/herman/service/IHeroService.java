@@ -21,4 +21,6 @@ public interface IHeroService {
     List<Hero> findByName(@Param("name") String name);
 
     List<Hero> findAll();
+
+    List<Hero> findSelective(@Param("hero") Hero hero);
 }

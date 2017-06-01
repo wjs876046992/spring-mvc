@@ -15,6 +15,22 @@ public class Hero {
 
     private Date updateTime;
 
+    private Date beginTime;
+
+    private Date endTime;
+
+    public Hero() {
+    }
+
+    public Hero(Integer id, String name, String power, String alterego, Date createTime, Date updateTime) {
+        this.id = id;
+        this.name = name;
+        this.power = power;
+        this.alterego = alterego;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -61,5 +77,21 @@ public class Hero {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Date getBeginTime() {
+        return beginTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setBeginTime(Date beginTime) {
+        this.beginTime = beginTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
     }
 }

@@ -25,6 +25,6 @@ public interface HeroMapper {
 
     List<Hero> findAll();
 
-
+    List<Hero> findSelective(@Param("pojo") Hero pojo);
 
 }

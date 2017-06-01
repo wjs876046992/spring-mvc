@@ -53,4 +53,9 @@ public class HeroService implements IHeroService {
     public List<Hero> findAll() {
         return this.heroMapper.findAll();
     }
+
+    @Override
+    public List<Hero> findSelective(Hero hero) {
+        return this.heroMapper.findSelective(hero);
+    }
 }
