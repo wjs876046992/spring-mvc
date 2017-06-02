@@ -1,21 +1,16 @@
 package com.herman.controller;
 
 import com.herman.entity.Hero;
-import com.herman.service.IHeroService;
 import com.herman.service.impl.HeroService;
-import org.apache.ibatis.annotations.Param;
-import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.json.Json;
-import javax.json.JsonObject;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +22,7 @@ public class HeroController {
     @Resource
     private HeroService heroService;
 
-    private static Logger logger = Logger.getLogger(HeroController.class);
+//    private static Logger logger = Logger.getLogger(HeroController.class);
 
     @ResponseBody
     @RequestMapping(value = "", method = RequestMethod.GET)
@@ -51,8 +46,10 @@ public class HeroController {
     }
 
     @ResponseBody
-    @RequestMapping(method = RequestMethod.PUT)
+    @RequestMapping(value="/{id}", method = RequestMethod.PUT)
     public Map<String, Object> updateHero(@RequestBody Hero hero) {
+        Date now = new Date();
+        hero.setUpdateTime(now);
         Map<String, Object> result = new HashMap<>();
         int count = this.heroService.updateByPrimaryKey(hero);
         result.put("data", count);
@@ -62,6 +59,9 @@ public class HeroController {
     @ResponseBody
     @RequestMapping(method = RequestMethod.POST)
     public Map<String, Object> createHero(@RequestBody Hero hero) {
+        Date now = new Date();
+        hero.setCreateTime(now);
+        hero.setUpdateTime(now);
         Map<String, Object> result = new HashMap<>();
         int count = this.heroService.insert(hero);
         result.put("data", count);
@@ -74,15 +74,6 @@ public class HeroController {
         Map<String, Object> result = new HashMap<>();
         Hero hero = this.heroService.selectByPrimaryKey(id);
         result.put("data", hero);
-        return result;
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public Map<String, Object> updateHero(@RequestBody Hero hero) {
-        Map<String, Object> result = new HashMap<>();
-        int count = this.heroService.updateByPrimaryKey(hero);
-        result.put("data", count);
         return result;
     }
 }
